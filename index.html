@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 Lab Template</title>
+    <link rel="stylesheet" href="styles.css"/>
+
+    <style>
+         body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e3f2fd;
+        }
+
+        .card {
+            padding: 10px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 3em;
+            padding: 0 0 10px 0;
+        }
+
+        .card-text {
+            font-weight: 400;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <template id="card-template" >
+        <div class="card">
+            <div class="card-body" >
+                <div class="card-title" ></div>
+                <div class="card-text" ></div>
+            </div>
+        </div>
+    </template >
+
+    <template id="artist">
+        <div class="card">
+            <div class="card-body" >
+                <div class="card-title" ></div>
+                <div class="card-text" ></div>
+                <div class="card-url" ></div>
+            </div>
+        </div>
+    </template>
+
+
+    <div id="card-list"></div>
+
+   
+    <input id="inputTitle" type="text" placeholder="Title">
+    <input id="inputText" type="text" placeholder="Text">
+    <button id="btn" onclick="addCard()">Create your Card!</button>
+
+
+    <div id="arr-list"></div>
+
+    <button id="btn1" onclick="addCardArr()">Template exercise 2!</button>
+
+    <div id="art-list"></div>
+
+
+
+    <script>
+
+            
+            const iTitle = document.getElementById("inputTitle");
+            const iText = document.getElementById("inputText");
+            const data = [{name: "bob", age: 23}, {name: "alice", age: 39}];
+            const artist={
+                        name:"Van Gogh",
+                        portfolio:[
+                        {title:"portrait",
+                        url:"https://collectionapi.metmuseum.org/api/collection/v1/iiif/436532/1671316/main-image"},
+                        {title:"sky",
+                        url:"https://mymodernmet.com/wp/wp-content/uploads/2020/11/White-house-night-van-goh-worldwide-2.jpg"},
+                        ]
+                        }
+
+
+
+            function addCard() {
+                const template = document.getElementById("card-template").content.cloneNode(true);
+                template.querySelector('.card-title').innerText = iTitle.value ;
+                template.querySelector('.card-text').innerText = iText.value;
+                document.querySelector('#card-list').appendChild(template);
+            };
+
+            function addCardArr() { 
+                for (let i = 0; i < data.length; i++ ) {
+                    const template = document.getElementById("card-template").content.cloneNode(true);
+                    template.querySelector('.card-title').innerText = data[i]["name"];
+                template.querySelector('.card-text').innerText = data[i]["age"];
+                document.querySelector('#arr-list').appendChild(template);
+                        console.log(data[i]);
+                } 
+            }
+
+            function art() {
+                
+                const template = document.getElementById("artist").content.cloneNode(true);
+                    template.querySelector('.card-title').innerText = artist.name ;
+
+                for(i=0; i<artist.portfolio.length; i++) {
+                    
+                  template.querySelector('.card-text').innerText = artist.portfolio[i].title; 
+                    template.querySelector('.card-url').innerText = artist.portfolio[i].url; 
+                    document.querySelector('#art-list').appendChild(template);
+                    console.log(artist.portfolio)
+                }
+                
+            };
+
+            art();
+            
+
+    </script>
+</body>
+</html>
